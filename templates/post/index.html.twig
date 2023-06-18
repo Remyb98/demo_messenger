@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}List{% endblock %}
+
+{% block body %}
+    <div class="row mb-3">
+        <h1 class="text-center">All posts</h1>
+    </div>
+    <div class="row mb-3">
+        <div class="list-group">
+            {% for post in posts %}
+                <a href="{{ path('app_post_show', {'post': post.id}) }}" class="list-group-item list-group-item-action" aria-current="true">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{ post.title }}</h5>
+                        <small>{{ post.createdAt|date('d/m/y H:i') }}</small>
+                    </div>
+                    <p class="mb-1">
+                        {{ post.content|u.truncate(75, '...', false) }}
+                    </p>
+                    <small>Written by {{ post.author }}</small>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
